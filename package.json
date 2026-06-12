@@ -1,0 +1,26 @@
+{
+  "name": "vendorside-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test:supabase": "node src/scripts/test-supabase.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.100.0",
+    "axios": "^1.16.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.4",
+    "form-data": "^4.0.5",
+    "morgan": "^1.10.0",
+    "multer": "^2.1.1",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
