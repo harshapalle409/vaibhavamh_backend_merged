@@ -13,6 +13,10 @@ import customerlocationRoutes from "./src/routes/customerlocation.routes.js";
 import customersearchVendorRoutes from "./src/routes/customersearchVendors.routes.js";
 import customervendorExtraDetailsRoutes from "./src/routes/customervendorExtraDetails.routes.js";
 import customeravailabilityRoutes from "./src/routes/customeravailability.routes.js";
+import customerProfileRoutes
+from "./src/routes/customerProfile.routes.js";
+import customerBookingsRoutes
+from "./src/routes/customerBookings.routes.js";
 
 dotenv.config();
 
@@ -80,6 +84,16 @@ app.use(
   customeravailabilityRoutes
 );
 
+app.use(
+  "/api/customer-profile",
+  customerProfileRoutes
+);
+
+
+app.use(
+"/api/bookings",
+customerBookingsRoutes
+);
 
 /* Health Check */
 app.get("/api/health", (_req, res) => {

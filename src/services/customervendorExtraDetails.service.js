@@ -1,66 +1,102 @@
-import {supabase} from "../config/supabase.js";
+import {
+  CATEGORY_LOADERS
+}
+from "./vendorExtraDetails/categoryLoaders.js";
 
-export const getVendorExtraDetails = async (
+export const getVendorExtraDetails =
+async (
   categoryId,
   serviceId
 ) => {
 
-  if (Number(categoryId) !== 201) {
-    throw new Error("Only Venue category supported");
+  const loader =
+    CATEGORY_LOADERS[
+      Number(categoryId)
+    ];
+
+  if (!loader) {
+
+    throw new Error(
+      "Category not supported"
+    );
+
   }
 
-  const { data: venue, error } =
-    await supabase
-      .from("venues")
-      .select("*")
-      .eq("id", serviceId)
-      .single();
-
-  if (error) {
-    throw error;
-  }
-
-  const { data: pricing } =
-    await supabase
-      .from("venue_pricing")
-      .select("*")
-      .eq("venue_id", serviceId)
-      .single();
-
-  const { data: amenities } =
-    await supabase
-      .from("venue_amenities")
-      .select(`
-        *,
-        amenities(*)
-      `)
-      .eq("venue_id", serviceId);
-
-  const { data: rules } =
-    await supabase
-      .from("venue_rules")
-      .select("*")
-      .eq("venue_id", serviceId);
-
-  const { data: additionalServices } =
-    await supabase
-      .from("venue_additional_services")
-      .select("*")
-      .eq("venue_id", serviceId);
-
-  return {
-    venue,
-
-    pricing: pricing || {},
-
-    amenities: amenities || [],
-
-    rules: rules || [],
-
-    additionalServices:
-      additionalServices || []
-  };
+  return await loader(
+    serviceId
+  );
 };
+
+
+
+
+
+
+
+
+// import {supabase} from "../config/supabase.js";
+
+// export const getVendorExtraDetails = async (
+//   categoryId,
+//   serviceId
+// ) => {
+
+//   if (Number(categoryId) !== 201) {
+//     throw new Error("Only Venue category supported");
+//   }
+
+//   const { data: venue, error } =
+//     await supabase
+//       .from("venues")
+//       .select("*")
+//       .eq("id", serviceId)
+//       .single();
+
+//   if (error) {
+//     throw error;
+//   }
+
+//   const { data: pricing } =
+//     await supabase
+//       .from("venue_pricing")
+//       .select("*")
+//       .eq("venue_id", serviceId)
+//       .single();
+
+//   const { data: amenities } =
+//     await supabase
+//       .from("venue_amenities")
+//       .select(`
+//         *,
+//         amenities(*)
+//       `)
+//       .eq("venue_id", serviceId);
+
+//   const { data: rules } =
+//     await supabase
+//       .from("venue_rules")
+//       .select("*")
+//       .eq("venue_id", serviceId);
+
+//   const { data: additionalServices } =
+//     await supabase
+//       .from("venue_additional_services")
+//       .select("*")
+//       .eq("venue_id", serviceId);
+
+//   return {
+//     venue,
+
+//     pricing: pricing || {},
+
+//     amenities: amenities || [],
+
+//     rules: rules || [],
+
+//     additionalServices:
+//       additionalServices || []
+//   };
+// };
 
 
 
