@@ -18,6 +18,8 @@ from "./src/routes/customerProfile.routes.js";
 import customerBookingsRoutes
 from "./src/routes/customerBookings.routes.js";
 
+
+//
 dotenv.config();
 
 const app = express();
