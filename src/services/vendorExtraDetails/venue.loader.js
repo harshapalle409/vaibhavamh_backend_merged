@@ -59,16 +59,23 @@ const { data: amenities } =
       .eq(
         "venue_id",
         serviceId
+    );
+
+  const { data: images } =
+    await supabase
+      .from("venue_images")
+      .select("*")
+      .eq(
+        "venue_id",
+        serviceId
       );
 
-      const { data: images } =
-await supabase
-  .from("venue_images")
-  .select("*")
-  .eq(
-    "venue_id",
-    serviceId
-  );
+  const formattedImages =
+(images || []).sort(
+(a,b)=>
+Number(b.is_primary)-
+Number(a.is_primary)
+);
 
   return {
 
@@ -90,7 +97,13 @@ await supabase
     rules || [],
 
   images:
-    images || []
+(images || []).sort(
+
+(a,b)=>
+
+Number(b.is_primary)-Number(a.is_primary)
+
+)
 
 };
 };

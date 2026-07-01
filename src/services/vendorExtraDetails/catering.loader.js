@@ -64,6 +64,15 @@ await supabase
         serviceId
       );
 
+  const formattedFacilities =
+  (facilities || []).map(item => ({
+
+    id: item.id,
+
+    name: item.facility_name
+
+  }));
+
   const { data: images } =
     await supabase
       .from("catering_images")
@@ -73,7 +82,12 @@ await supabase
         serviceId
       );
 
-      
+  const formattedImages =
+(images || []).sort(
+(a,b)=>
+Number(b.is_primary)-
+Number(a.is_primary)
+);
 
   return {
 
@@ -88,13 +102,19 @@ await supabase
   },
 
   facilities:
-    facilities || [],
+formattedFacilities,
 
   rules:
     rules || [],
 
   images:
-    images || []
+(images || []).sort(
+
+(a,b)=>
+
+Number(b.is_primary)-Number(a.is_primary)
+
+)
 
 };
 };
