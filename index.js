@@ -15,6 +15,8 @@ import customervendorExtraDetailsRoutes from "./src/routes/customervendorExtraDe
 import customeravailabilityRoutes from "./src/routes/customeravailability.routes.js";
 import customerProfileRoutes from "./src/routes/customerProfile.routes.js";
 import customerBookingsRoutes from "./src/routes/customerBookings.routes.js";
+import customerwishlistRoutes from "./src/routes/CustomerwishlistRoutes.js";
+import customercartRoutes from "./src/routes/CustomercartRoutes.js";
 
 //
 dotenv.config();
@@ -92,6 +94,16 @@ app.use(
 app.use(
 "/api/bookings",
 customerBookingsRoutes
+);
+
+app.use(
+  "/api/wishlist",
+  customerwishlistRoutes
+);
+
+app.use(
+  "/api/cart",
+  customercartRoutes
 );
 
 /* Health Check */
